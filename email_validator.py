@@ -5,9 +5,10 @@ import re
 #  Domain: at least 2 lowercase letters
 #  Extension: 2–3 lowercase letters
 
-email = input("Enter your email: ").strip()
 
-if re.fullmatch(r"[\w\.]{3,}@[a-z]{2,}\.[a-z]{2,3}", email):
-    print("Your email is valid")
-else:
-    print("Your email is not valid")
+def validate_email(email):
+
+    if re.fullmatch(r"[\w\.]{3,}@[a-z]{2,}\.[a-z]{2,3}", email):
+        return f"{email} is valid."
+    else:
+        return f"{email} is not valid."
