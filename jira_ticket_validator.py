@@ -9,6 +9,14 @@ import re
 def validate_jira_ticket(ticket):
 
     if re.fullmatch(r"[A-Z]{2,5}-[0-9]{1,}", ticket):
-        return f"{ticket} is valid"
+        return f"{ticket} is valid."
     else:
-        return f"{ticket} is not valid"
+        return f"{ticket} is not valid."
+
+# Testing
+
+print(validate_jira_ticket("HSU-123"))   # valid
+print(validate_jira_ticket("AB-9"))      # valid
+print(validate_jira_ticket("A-123"))     # not valid
+print(validate_jira_ticket("PROJECT-1")) # not valid
+print(validate_jira_ticket("PR-"))       # not valid
