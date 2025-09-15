@@ -1,10 +1,17 @@
 import re
 from jira_ticket_validator import validate_jira_ticket
 #Commit message validator
-# Format: <type>(<scope>): <subject> <JIRA-ID>
+# Format: <type>(<scope>): <subject> [JIRA-ID]
 # Example: feature(auth): add login flow HSU-123
 
 def commit_validator(message):
+
+    parts = re.match(r"(?P<type_part>feat|feature|fix|bug|docs|style|refactor|perf|test|build|ci|chore|revert)\(([^)]+)\):(.+?)(\[[A-Z]{2,5}-[0-9]{1,4}\])", message)
+
+
+
+
+
     types_list = ["feat", "feature", "fix", "bug", "docs", "style", "refactor", "perf", "test", "build", "ci", "chore", "revert"]
     if message.count(":") != 1:
         return "Commit message must contain exactly one colon."
