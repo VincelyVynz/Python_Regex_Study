@@ -20,10 +20,10 @@ def validate_jira_ticket(ticket):
         project, issue = ticket.split("-", 1)
 
         if not re.fullmatch(r"[A-Z]{2,5}", project):
-            error_list.append("Project name must be 2 -5 uppercase letters.")
+            error_list.append("Jira project name must be 2 -5 uppercase letters.")
 
         if not re.fullmatch(r"[0-9]{1,4}", issue):
-            error_list.append("Issue name must be 1 - 4 digits.")
+            error_list.append("Jira issue name must be 1 - 4 digits.")
 
 
     if error_list:

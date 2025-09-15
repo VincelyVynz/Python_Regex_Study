@@ -6,37 +6,33 @@ from jira_ticket_validator import validate_jira_ticket
 
 def commit_validator(message):
     types_list = ["feat", "feature", "fix", "bug", "docs", "style", "refactor", "perf", "test", "build", "ci", "chore", "revert"]
-    colon_count = 0
-    for char in message:
-        if char  == ":":
-            colon_count += 1
-
-    if colon_count > 1:
-        return "Only one colon allowed."
-
-    elif colon_count == 0:
-        return "Commit message must have one colon."
+    if message.count(":") != 1:
+        return "Commit message must contain exactly one colon."
 
     else:
-        type_scope, subject_jira_id = message.split(":")
+        type_scope, subject_jira_id = message.split(":",1)
         type_scope, subject_jira_id = type_scope.strip(), subject_jira_id.strip()
 
-        if "(" not in type_scope:
+        if not ("(" in type_scope and type_scope.endswith(")")):
             return "Invalid type scope."
         else:
             type_part,scope = type_scope.split("(",1)
-            scope = scope.rstrip(")",1)
-            if not re.fullmatch(r".+", scope):
+            scope = scope[:-1]
+            if not scope:
                 return "Missing scope."
 
             if type_part not in types_list:
                 return "Invalid type."
 
-        subject, jira_id = subject_jira_id.rsplit(" ",1)
+        if " " not in subject_jira_id:
+            return "Missing subject or jira ID."
+        else:
+            subject, jira_id = subject_jira_id.rsplit(" ",1)
 
-        return subject, validate_jira_ticket(jira_id)
+            jira_result = validate_jira_ticket(jira_id)
+            if  not jira_result.endswith("is valid."):
+                return jira_result
 
 
-
-
+        return f"Type: {type_part}\nScope: {scope}\nSubject: {subject}\nJira ID: {jira_id}\n{message} is a valid commit message"
 
