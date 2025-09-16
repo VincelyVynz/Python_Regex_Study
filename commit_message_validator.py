@@ -6,25 +6,33 @@ from jira_ticket_validator import validate_jira_ticket
 
 def commit_validator(message):
     message = message.strip()
-    parts = re.match(r"(?P<type_part>feat|feature|fix|bug|docs|style|refactor|perf|test|build|ci|chore|revert)"
-                     r"\((?P<scope>[^)]+)\):"
+    parts = re.match(r"^(?P<type_part>feat|feature|fix|bug|docs|style|refactor|perf|test|build|ci|chore|revert)"
+                     r"\((?P<scope>[^)]+)\):\s*"
                      r"(?:"
                      r"(?P<jira_id1>\[[A-Z]{2,5}-[0-9]{1,4}\])\s*(?P<subject1>.+)"
                      r"|"
                      r"(?P<subject2>.+?)\s*(?P<jira_id2>\[[A-Z]{2,5}-[0-9]{1,4}\])"
                      r")$", message)
 
-    type_part = parts.group("type_part")
-    scope = parts.group("scope")
-    subject = parts.group("subject1") or parts.group("subject2")
-    jira_id = parts.group("jira_id1") or parts.group("jira_id2")
 
-    print(type_part)
-    print(scope)
-    print(subject)
-    print(jira_id)
+    if parts:
+        result = {
+        "type_part" : parts.group("type_part"),
+        "scope" : parts.group("scope"),
+        "subject" : parts.group("subject1") or parts.group("subject2"),
+        "jira_id" : parts.group("jira_id1") or parts.group("jira_id2")
+        }
+        for name, value in result.items():
+            if not value or not value.strip():
+                print(f"Error in {name}")
+            else:
+                print(f"{name}: {value}")
+    else:
+        print("Missing or invalid format.")
 
-commit_validator("feature(auth): [HSU-123] add login flow ")
+
+# commit_validator("feature(auth): [HSU-123] add login flow ")
+commit_validator("feature(auth): add login flow HSU-123 ")
 
 # types_list = ["feat", "feature", "fix", "bug", "docs", "style", "refactor", "perf", "test", "build", "ci", "chore", "revert"]
 # if message.count(":") != 1:
