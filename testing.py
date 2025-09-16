@@ -20,10 +20,10 @@ commit_validator("feature(auth): add patch")                # not valid (missing
 
 
 # ---------------------------- Testing jira tickets ---------------------------- #
-# from jira_ticket_validator import validate_jira_ticket
-#
-# print(validate_jira_ticket("HSU-123"))   # valid
-# print(validate_jira_ticket("AB-9"))      # valid
-# print(validate_jira_ticket("A-123"))     # not valid
-# print(validate_jira_ticket("PROJECT-1")) # not valid
-# print(validate_jira_ticket("PR-"))       # not valid
+from jira_ticket_validator import validate_jira_ticket
+
+print(validate_jira_ticket("HSU-123"))   # valid
+print(validate_jira_ticket("AB-9"))      # valid
+print(validate_jira_ticket("A-123"))     # not valid
+print(validate_jira_ticket("PROJECT-1")) # not valid
+print(validate_jira_ticket("PR-"))       # not valid
