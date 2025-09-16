@@ -22,11 +22,13 @@ def commit_validator(message):
         "subject" : parts.group("subject1") or parts.group("subject2"),
         "jira_id" : parts.group("jira_id1") or parts.group("jira_id2")
         }
+
         for name, value in result.items():
-            if not value or not value.strip():
-                print(f"Error in {name}")
+            if value is None:
+                result[name] = "Missing or invalid."
             else:
-                print(f"{name}: {value}")
+                result[name] = value
+            print(result)
     else:
         print("Missing or invalid format.")
 
