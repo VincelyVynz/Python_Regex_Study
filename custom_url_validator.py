@@ -8,7 +8,7 @@ def custom_image(url):
     parts= re.match(r"^length=(?P<length>\d{2,4})/width=(?P<width>\d{2,4})/bg_color="
                 r"(?P<bg_color>#[A-Z0-9]{6})/fg_color=(?P<fg_color>#[A-Z0-9]{6})/"
                 r"border=(?P<border>y|n)/orientation=(?P<orientation>v|h)/"
-                r"font=(?P<font>\([A-Za-z\s]+,[\d]{1,2},[A-Za-z\s]+\))/(?:header=(?P<header>.*?)?/)?text=(?P<text>.*)$",
+                r"font=(?P<font>\([A-Za-z\s]+,[\d]{1,2},[A-Za-z\s]+\))/(?:header=(?P<header>.*?)?/)?(?:footer=(?P<footer>.*?)?/)?text=(?P<text>.*)$",
                 url)
 
     if parts:
