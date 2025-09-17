@@ -5,10 +5,10 @@ import re
 # font = ('Arial', 24, 'italic') normal, bold
 # #000000 black #FFFFFF white
 def custom_image(url):
-    parts= re.match(r"^(?P<length>length=\d{2,4})/(?P<width>width=\d{2,4})/"
-                r"(?P<bg_color>bg_color=#[A-Z0-9]{6})/(?P<fg_color>fg_color=#[A-Z0-9]{6})/"
-                r"(?P<border>border=y|n)/(?P<orientation>orientation=v|h)/"
-                r"(?P<font>font=\([A-Za-z\s]+,[\d]{1,2},[A-Za-z\s]+\))/(?P<header>header=.*?)?(?P<text>text=.*)$",
+    parts= re.match(r"^length=(?P<length>\d{2,4})/width=(?P<width>\d{2,4})/bg_color="
+                r"(?P<bg_color>#[A-Z0-9]{6})/fg_color=(?P<fg_color>#[A-Z0-9]{6})/"
+                r"border=(?P<border>y|n)/orientation=(?P<orientation>v|h)/"
+                r"font=(?P<font>\([A-Za-z\s]+,[\d]{1,2},[A-Za-z\s]+\))/(?:header=(?P<header>.*?)?/)?text=(?P<text>.*)$",
                 url)
 
     if parts:
