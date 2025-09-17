@@ -10,12 +10,16 @@ import re
 # URL Format: protocol://subdomain.domain/path/path/filename/query
 
 def image_url_validator(image_url):
-    url_parts = re.match(
-        r"^(?P<protocol>https|http)://(?P<domain>[A-Za-z0-9.-]+?)/(?P<path_to_file>.+?)/(?P<filename>[\w\-]+?)(?P<format>png|jpg|jpeg|gif|svg|webp)(?P<query>[\w\s\?\=]*)?",
-        image_url)
+    if re.match(
+        r"(?P<protocol>https|http)://(?P<domain>[\w\.]+)/(?P<file_path>[\w/-]+?)/(?P<file_name>[\w-]+)\.(?P<fileformat>jpg|png|jpeg|gif|webp|tga|bmp|exr|hdr|tiff)(?P<query>[?\w=&_-]*)",
+        image_url):
+        print("Image URL Valid")
+
+    else:
+        print("Image URL Not Valid")
 
 
 
 
 
-    return url_parts
+image_url_validator("https://cdnb.artstation.com/p/assets/images/images/078/091/459/large/vincely-scifi-door-render-6.jpg?1721165680")
