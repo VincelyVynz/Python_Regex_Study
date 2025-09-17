@@ -1,7 +1,7 @@
 import re
 # -------------------Commit message validator ------------------- #
 # Format: <type>(<scope>): <subject> [JIRA-ID]
-# Example: feature(auth): add login flow HSU-123
+# Example: feature(auth): add login flow [HSU-123]
 
 def commit_validator(message):
     message = message.strip()
